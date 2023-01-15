@@ -10,11 +10,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CardsComponent } from './cards/cards.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,

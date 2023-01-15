@@ -1,0 +1,47 @@
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 90%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+
+
+.example-card {
+  max-width: 30%;
+  margin: 0 8px 16px;
+}
+
+.example-header-image {
+  background-image: url('https://avatars.githubusercontent.com/u/47231898?v=4');
+  background-size: cover;
+}
+
+.card-container .example-card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+}
+
+mat-card-content h1 {
+  text-align: center;
+}
+a {
+  width: 100%;
+ }
+
+  /* Responsive Styles */
+  @media screen and (max-width: 342px) {
+    .example-card {
+      max-width: 100%;
+      margin: 0 8px 16px;
+    }
+  }
