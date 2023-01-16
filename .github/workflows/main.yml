@@ -24,7 +24,9 @@ jobs:
       run: npm test -- --watch=false --browsers=ChromeHeadless
 
     - name: Build
-      run: npm run build -- --prod
+      run: | 
+           npm install 
+           npm run-script build
 
     - name: Deploy
       if: success()
