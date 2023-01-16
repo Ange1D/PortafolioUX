@@ -2,34 +2,46 @@ name: CI Portafolio UX
 
 on:
   push:
-    branches:
-    - main
+    branches: [ "master" ]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-        
-    - name: Install dependencies
-      run: npm ci
+      - name: Set up node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: '16'
+          cache: 'npm'
 
-    - name: Run tests
-      run: npm run test:prod
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build:prod
+      - name: Lint
+        run: npm run lint
 
-    - name: Deploy
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: dist/PortafolioUX
-        enable_jekyll: true
+      - name: Tests
+        run: npm run test:prod
+
+      - name: Replace secret
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{'
+          tokenSuffix: '}'
+          files: 'src/environments/environment.prod.ts'
+        env:
+          SECRET_API_KEY: ${{ secrets.API_KEY}}
+
+      - name: Build
+        run: npm run build:prod
+
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: dist/weather-app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
