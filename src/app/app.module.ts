@@ -11,12 +11,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CardsComponent } from './cards/cards.component';
+import { Project1Component } from './projects/project1/project1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    CardsComponent
+    CardsComponent,
+    Project1Component
   ],
   imports: [
     BrowserModule,
