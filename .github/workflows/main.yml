@@ -16,17 +16,18 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-
+        
     - name: Install dependencies
-      run: npm install
+      run: npm ci
+
+    - name: Lint
+      run: npm run lint
 
     - name: Run tests
-      run: npm test -- --watch=false --browsers=ChromeHeadless
+      run: npm run test:prod
 
     - name: Build
-      run: | 
-           npm install 
-           npm run-script build
+      run: npm run build:prod
 
     - name: Deploy
       if: success()
